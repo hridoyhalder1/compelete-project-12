@@ -1,6 +1,5 @@
 [
     {
-        "_id": "635a0c0b64a6d231228942ae",
         "service_id": "04",
         "title": "Apple",
         "img": "https://pegaoseuproduto.com/wp-content/uploads/2022/07/262997808_1GG.jpg",
@@ -39,7 +38,6 @@
         ]
     },
     {
-        "_id": "635a0c0b64a6d231228942af",
         "service_id": "05",
         "title": "Google Pixel",
         "img": "https://media.wired.com/photos/5f888e1e033aa21518af44c2/1:1/w_1800,h_1800,c_limit/Gear-Google-Pixel-5-SOURCE-Google.jpg",
@@ -77,7 +75,6 @@
         ]
     },
     {
-        "_id": "635b591a1dafe382a9da8c96",
         "service_id": "01",
         "title": "Samsung",
         "img": "https://images.samsung.com/is/image/samsung/assets/us/smartphones/11222022/dt/Smartphones-PCD_CO15-05-vision-booster-D.jpg?$684_684_PNG$",

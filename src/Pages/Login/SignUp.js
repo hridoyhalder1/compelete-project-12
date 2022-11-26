@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import loginImg from '../../assets/Login.jpg';
 import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
 
@@ -18,7 +19,9 @@ const SignUp = () => {
         createUser(email, password)
         .then( result => {
             const user = result.user;
+            toast.success('Register Successfully!')
             console.log(user);
+
             form.reset();
         })
         .catch( error => console.error(error));

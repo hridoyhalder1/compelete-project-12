@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import loginImg from '../../assets/Login.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const Login = () => {
     const { login, providerLogin } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [loginError, setLoginError] = useState('');
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -14,24 +22,34 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
+
+        setLoginError('');
         login(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
+                toast.success('Login Successfully!')
                 form.reset();
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error)
+                setLoginError(error.message);
+            })
     }
 
     // google authentication
     const googleProvider = new GoogleAuthProvider();
     const handleGoogle = () => {
         providerLogin(googleProvider)
-        .then(result => {
-            const user= result.user;
-            console.log(user);
-        })
-        .catch(error => console.error(error))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                console.error(error)
+                
+            })
     }
 
 
@@ -54,7 +72,7 @@ const Login = () => {
                                 </label>
                                 <input type="text" name='email' placeholder="email" className="input input-bordered" required />
                             </div>
-                            
+
 
                             <div className="form-control">
                                 <label className="label">
@@ -65,6 +83,9 @@ const Login = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <input type="submit" className="btn btn-primary" value="Login" />
+                            </div>
+                            <div>
+                                {loginError && <p className='text-red-600'>{loginError}</p>}
                             </div>
                         </form>
                         <p className=' ml-8'>Don't have an account? Please <Link className=' text-orange-600' to='/signup'>SignUp</Link> </p>

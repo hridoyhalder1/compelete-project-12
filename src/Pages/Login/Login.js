@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import loginImg from '../../assets/Login.jpg';
+import { AuthContext } from '../../context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-
+    const { login, providerLogin } = useContext(AuthContext);
 
     const handleLogin = event => {
         event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(error => console.error(error))
+    }
+
+    // google authentication
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogle = () => {
+        providerLogin(googleProvider)
+        .then(result => {
+            const user= result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
     }
 
 
@@ -32,11 +56,6 @@ const Login = () => {
                             </div>
                             
 
-                            {/* <select className="select select-bordered w-full max-w-xs">
-                                <option disabled selected>Who shot first?</option>
-                                <option>Han Solo</option>
-                                <option>Greedo</option>
-                            </select> */}
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
@@ -50,7 +69,7 @@ const Login = () => {
                         </form>
                         <p className=' ml-8'>Don't have an account? Please <Link className=' text-orange-600' to='/signup'>SignUp</Link> </p>
                         <p className=' text-center font-bold text-indigo-700'>Or Login With</p>
-                        <span className=' text-center pl-48 pt-4  pb-3 cursor-pointer'> <FaGoogle /> </span>
+                        <span onClick={handleGoogle} className=' text-center pl-48 pt-4  pb-3 cursor-pointer'> <FaGoogle /> </span>
                     </div>
                 </div>
             </div>

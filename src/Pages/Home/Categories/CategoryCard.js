@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CategoryCard = ({ category }) => {
-    const { title, img, _id} = category;
-    // const {name} = product;
+    const { title, img, _id }= category;
     return (
         <div>
             <div className="card  w-96 bg-base-100 shadow-xl ">

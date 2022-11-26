@@ -10,7 +10,7 @@ const SignUp = () => {
 
 
     return (
-        <div className="hero w-full min-h-screen bg-base-200">
+        <div className="hero w-full min-h-screen ">
             <div className="hero-content grid md:grid-cols-2 flex-col lg:flex-row">
                 <div className="text-center lg:text-left">
 
@@ -34,9 +34,18 @@ const SignUp = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
+                                <span className="label-text">Select Your Role:</span>
+                            </label>
+                            <select className="select select-bordered w-full max-w-xs">
+                                <option disabled selected>User</option>
+                                <option>Seller</option>
+                            </select>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='password' placeholder="password" className="input input-bordered" required />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
 
                         </div>
                         <div className="form-control mt-6">

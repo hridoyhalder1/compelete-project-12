@@ -8,7 +8,8 @@ const Categories = () => {
         fetch('http://localhost:5000/category')
         .then(res => res.json())
         .then(data => setCategories(data))
-    }, [])
+    }, []);
+    
 
     return (
         <div className='mb-12'>
@@ -22,7 +23,9 @@ const Categories = () => {
 
                     </CategoryCard>)
                 }
+                
             </div>
+            
         </div>
     );
 };

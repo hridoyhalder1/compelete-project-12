@@ -37,7 +37,7 @@ const SignUp = () => {
                                 <span className="label-text">Select Your Role:</span>
                             </label>
                             <select className="select select-bordered w-full max-w-xs">
-                                <option disabled selected>User</option>
+                                <option  selected>User</option>
                                 <option>Seller</option>
                             </select>
                         </div>

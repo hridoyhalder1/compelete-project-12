@@ -20,8 +20,8 @@ const ProductsCard = ({ product }) => {
                     <div className="badge badge-outline">Used:{use}</div>
                     <div className="badge badge-outline">Location: {location}</div>
                 </div>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Now</button>
+                <div className="card-actions justify-end pt-3">
+                    <button className="btn btn-md btn-primary">Book Now</button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
 import Blog from "../../Pages/Blog/Blog";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Products from "../../Pages/Home/Categories/Products";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -32,6 +33,10 @@ import SignUp from "../../Pages/Login/SignUp";
                 element: <Products></Products>,
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
             },
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            }
             
         ]
     },

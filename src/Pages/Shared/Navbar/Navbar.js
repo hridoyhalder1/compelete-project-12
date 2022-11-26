@@ -1,23 +1,36 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
+import { FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
 
-    const {logOut, user} = useContext(AuthContext);
+    const { logOut, user } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(error => console.log(error))
+            .then(() => { })
+            .catch(error => console.log(error))
     }
 
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-        <button className=' cursor-pointer font-semibold' onClick={handleLogOut}>Log out</button>
+
+        {
+            user?.uid ?
+                <>
+                    <li><button className=' cursor-pointer font-semibold' onClick={handleLogOut}>Log out</button></li>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                </>
+                :
+                <>
+                    <li><Link to='/login'>Login</Link></li>
+                </>
+        }
+
+
     </>
     return (
         <div>
@@ -38,7 +51,21 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                
+                <div className="navbar-end p-0">
+
+                    {user?.photoURL ?
+                        <img
+                            src={user?.photoURL}
+                            alt=""
+                            className=' rounded-full w-10 cursor-pointer'
+                            title={user?.displayName}
+
+                        />
+                        : <FaUser></FaUser>
+                    }
+
+                </div>
+
             </div>
         </div>
     );

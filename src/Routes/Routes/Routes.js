@@ -26,8 +26,18 @@ import Login from "../../Pages/Login/Login";
                 path: '/products/:id',
                 element: <Products></Products>,
                 loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
-            }
+            },
+            
         ]
+    },
+    {
+        path: '*',
+        element: <div>
+            <h2 className="text-4xl text-center mt-40 font-bold">404 Page<br/>
+            Page Not Found
+            </h2>
+
+        </div>
     }
 ])
 

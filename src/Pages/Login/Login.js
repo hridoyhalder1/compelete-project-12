@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import loginImg from '../../assets/Login.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
-import { useNavigate, useLocation } from 'react-router-dom';
+
 
 
 const Login = () => {

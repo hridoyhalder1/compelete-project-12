@@ -21,7 +21,7 @@ const SignUp = () => {
             const user = result.user;
             toast.success('Register Successfully!')
             const userInfo = {
-                displayName: event.name
+                displayName: name
             }
             updateUser(userInfo)
                 .then(() => {

@@ -6,7 +6,7 @@ const MyOrder = () => {
 
     const {user} = useContext(AuthContext);
 
-    const url =`http://localhost:5000/bookings?displayName=${user?.displayName}`;
+    const url =`https://final-assignment-server-site.vercel.app/bookings?displayName=${user?.displayName}`;
     // console.log(url);
 
     const { data: bookings = [] } = useQuery({

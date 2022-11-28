@@ -6,9 +6,9 @@ import CompanyInfo from '../CompanyInfo/CompanyInfo';
 const Home = () => {
     return (
         <div className=' mx-5'>
-            <Banner></Banner>
-            <CompanyInfo></CompanyInfo>
+            <Banner></Banner>            
             <Categories></Categories>
+            <CompanyInfo></CompanyInfo>
         </div>
     );
 };

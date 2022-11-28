@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+// import React, { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
 
 const Categories = () => {
 
-    const [categories, setCategories] = useState([]);
-    useEffect( () => {
-        fetch('https://final-assignment-server-site.vercel.app/category')
+    // const [categories, setCategories] = useState([]);
+
+    const {data:categories = []} = useQuery({
+        queryKey: ['categories'],
+        queryFn: () => fetch('https://final-assignment-server-site.vercel.app/category')
         .then(res => res.json())
-        .then(data => setCategories(data))
-    }, []);
+    })
+
+
+
+
+
+    // useEffect( () => {
+    //     fetch('https://final-assignment-server-site.vercel.app/category')
+    //     .then(res => res.json())
+    //     .then(data => setCategories(data))
+    // }, []);
     
 
     return (

@@ -24,6 +24,7 @@ const BookingModal = ({ productss, setProductss }) => {
             location,
             price,
             number
+            
         }
 
         fetch('http://localhost:5000/bookings', {

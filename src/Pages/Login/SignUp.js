@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const SignUp = () => {
 
-    const {createUser, updateUser} = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSignUp = event => {
@@ -15,25 +15,43 @@ const SignUp = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name ,email, password);
+        // console.log(name, email, password);
 
         createUser(email, password)
-        .then( result => {
-            const user = result.user;
-            toast.success('Register Successfully!')
-            const userInfo = {
-                displayName: name
-            }
-            updateUser(userInfo)
-                .then(() => {
-                    navigate('/');
-                })
-                .catch(err => console.log(err));
-            console.log(user);
+            .then(result => {
+                const user = result.user;
+                toast.success('Register Successfully!')
+                const userInfo = {
+                    displayName: name,
+                    
 
-            form.reset();
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(name, email);
+                    })
+                    .catch(err => console.log(err));
+                console.log(user);
+
+                form.reset();
+            })
+            .catch(error => console.error(error));
+    }
+
+    const saveUser = (name, email ) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
         })
-        .catch( error => console.error(error));
+            .then(res => res.json())
+            .then(data => {
+                console.log('save user',data);
+                navigate('/');
+            })
     }
 
 
@@ -60,22 +78,21 @@ const SignUp = () => {
                             </label>
                             <input type="text" name='email' placeholder="email" className="input input-bordered" required />
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Select Your Role:</span>
-                            </label>
-                            <select className="select select-bordered w-full max-w-xs">
-                                <option  selected>User</option>
-                                <option>Seller</option>
-                            </select>
+                        {/* users/buyer */}
+                        <div className="dropdown dropdown-bottom">
+                            <label tabIndex={0} className="btn m-1">Select your role:</label>
+                            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a>Users</a></li>
+                                <li><a>Buyer</a></li>
+                            </ul>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
-
                         </div>
+
                         <div className="form-control mt-6">
                             <input type="submit" className="btn btn-primary" value="SignUp" />
                         </div>

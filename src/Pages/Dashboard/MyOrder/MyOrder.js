@@ -1,6 +1,24 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const MyOrder = () => {
+
+    const {user} = useContext(AuthContext);
+
+    const url =`http://localhost:5000/bookings?displayName=${user?.displayName}`;
+    // console.log(url);
+
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings', user?.displayName],
+        queryFn: async () => {
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        }
+    })
+
+
     return (
         <div>
             <h2 className=' text-4xl mb-5'>My Order</h2>
@@ -10,32 +28,26 @@ const MyOrder = () => {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Products</th>
+                            <th>Location</th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
+                        {   bookings &&
+                            bookings?.map(( booking, i) =>
+                            <tr
+                            key={booking._id}
+                            >
+                                <th>{i+1}</th>
+                                <td>{booking.name}</td>
+                                <td>{booking.productss}</td>
+                                <td>{booking.location}</td>
+                                <td>{booking.price}</td>
+                            </tr>)
+                        }
                         
-                        <tr className="hover">
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

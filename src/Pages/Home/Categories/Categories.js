@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-// import React, { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
 
 const Categories = () => {
@@ -8,8 +7,11 @@ const Categories = () => {
 
     const {data:categories = []} = useQuery({
         queryKey: ['categories'],
-        queryFn: () => fetch('https://final-assignment-server-site.vercel.app/category')
-        .then(res => res.json())
+        queryFn: async() => {
+            const res = await fetch('https://final-assignment-server-site.vercel.app/category');
+            const data = await res.json();
+            return data;
+        }
     })
 
 

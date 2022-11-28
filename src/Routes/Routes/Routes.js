@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../layout/DashboardLayout";
 import Main from "../../layout/Main";
 import Blog from "../../Pages/Blog/Blog";
-import Dashboard from "../../Pages/Dashboard/Dashboard";
+// import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
 import Products from "../../Pages/Home/Categories/Products";
 import Home from "../../Pages/Home/Home/Home";

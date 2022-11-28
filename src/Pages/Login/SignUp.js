@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/Login.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 const SignUp = () => {
 
     const {createUser, updateUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -25,7 +26,7 @@ const SignUp = () => {
             }
             updateUser(userInfo)
                 .then(() => {
-                    userInfo();
+                    navigate('/');
                 })
                 .catch(err => console.log(err));
             console.log(user);
